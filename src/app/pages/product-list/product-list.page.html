@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Προϊόντα</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item
+      *ngFor="let product of products"
+      button
+      (click)="goToProduct(product.id)"
+    >
+      <ion-thumbnail slot="start">
+        <img [src]="product.image" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price | currency:'EUR':'symbol' }}</p>
+        <ion-badge [color]="product.available ? 'success' : 'danger'">
+          {{ product.available ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
+        </ion-badge>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

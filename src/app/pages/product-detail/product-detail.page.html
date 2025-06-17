@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>product-detail</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Προϊόν</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">product-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card *ngIf="product">
+    <img [src]="product.image" alt="εικόνα προϊόντος" />
+
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-card-subtitle>{{ product.unit }} - {{ product.price | currency:'EUR':'symbol' }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{ product.description }}</p>
+      <p><strong>Διατροφική αξία:</strong> {{ product.nutrition }}</p>
+      <p><strong>Διαθεσιμότητα:</strong>
+        <ion-badge [color]="product.available ? 'success' : 'danger'">
+          {{ product.available ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
+        </ion-badge>
+      </p>
+
+      <ion-button expand="block" color="success">
+        ➕ Προσθήκη στη λίστα αγορών
+      </ion-button>
+      <ion-button expand="block" fill="outline" color="medium">
+        💾 Αποθήκευση στη λίστα επιθυμιών
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
