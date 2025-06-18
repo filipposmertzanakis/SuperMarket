@@ -9,7 +9,7 @@ export class FirestoreService {
   constructor(private firestore: Firestore) {}
 
   getProducts(): Observable<any[]> {
-    const productRef = collection(this.firestore, 'Products');
+    const productRef = collection(this.firestore, 'products');
     return collectionData(productRef, { idField: 'id' });
   }
 }

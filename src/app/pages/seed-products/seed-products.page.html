@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Εισαγωγή Προϊόντων</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button
+    expand="block"
+    color="success"
+    (click)="seed()"
+    [disabled]="loading"
+  >
+    {{ loading ? 'Εισαγωγή...' : 'Μαζική Εισαγωγή Προϊόντων' }}
+  </ion-button>
+
+  <div *ngIf="message" class="ion-padding-top">
+    <ion-text [color]="message.startsWith('✅') ? 'success' : 'danger'">
+      <p>{{ message }}</p>
+    </ion-text>
+  </div>
+</ion-content>
