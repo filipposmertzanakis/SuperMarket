@@ -6,21 +6,10 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item
-      *ngFor="let product of products"
-      button
-      (click)="goToProduct(product.id)"
-    >
-      <ion-thumbnail slot="start">
-        <img [src]="product.image" />
-      </ion-thumbnail>
-
+    <ion-item *ngFor="let product of products">
       <ion-label>
         <h2>{{ product.name }}</h2>
-        <p>{{ product.price | currency:'EUR':'symbol' }}</p>
-        <ion-badge [color]="product.available ? 'success' : 'danger'">
-          {{ product.available ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
-        </ion-badge>
+        <p>{{ product.price }} €</p>
       </ion-label>
     </ion-item>
   </ion-list>
