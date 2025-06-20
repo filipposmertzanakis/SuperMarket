@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  availability: boolean;
+  stock: number;
+  category: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -12,12 +24,23 @@ export class HomePage implements OnInit {
   isLoggedIn = false;
   userEmail = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  products$: Observable<Product[]> | undefined;
+  filteredProducts: Product[] = [];
+  categories = ['All', 'Fresh', 'Dairy', 'Frozen', 'Cleaning'];
+  selectedCategory = 'All';
+
+  constructor(private authService: AuthService, private router: Router, private firestore: Firestore) {}
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
       this.isLoggedIn = !!user;
       this.userEmail = user?.email || '';
+    });
+
+    const productsRef = collection(this.firestore, 'products');
+    this.products$ = collectionData(productsRef, { idField: 'id' }) as Observable<Product[]>;
+    this.products$.subscribe(products => {
+      this.filteredProducts = products;
     });
   }
 
@@ -33,5 +56,16 @@ export class HomePage implements OnInit {
 
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  filterByCategory(category: string) {
+    this.selectedCategory = category;
+    this.products$?.subscribe(products => {
+      if (category === 'All') {
+        this.filteredProducts = products;
+      } else {
+        this.filteredProducts = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
+      }
+    });
   }
 }
