@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ολοκλήρωση Αγοράς</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list *ngIf="cartItems.length > 0">
+    <ion-item *ngFor="let item of cartItems">
+      <ion-label>
+        <h2>{{ item.title }}</h2>
+        <p>Ποσότητα: {{ item.quantity }}</p>
+        <p>Τιμή: {{ item.price }} €</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="cartItems.length > 0">
+    <ion-card-content>
+      <h3>Σύνολο: {{ total | number:'1.2-2' }} €</h3>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Όνομα</ion-label>
+      <ion-input [(ngModel)]="customer.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="customer.email"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="success" (click)="completeOrder()" [disabled]="loading">
+    {{ loading ? 'Αποστολή...' : 'Ολοκλήρωση Αγοράς' }}
+  </ion-button>
+
+  <ion-text *ngIf="message" [color]="message.startsWith('✅') ? 'success' : 'danger'">
+    <p class="ion-padding-top">{{ message }}</p>
+  </ion-text>
+
+</ion-content>

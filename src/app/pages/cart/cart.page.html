@@ -30,8 +30,9 @@
 
   <div *ngIf="cartItems.length > 0" class="ion-margin-top">
     <h2>Σύνολο: {{ total | number:'1.2-2' }} €</h2>
-    <ion-button expand="block" color="success" (click)="checkout()">
-      Ολοκλήρωση Αγοράς
-    </ion-button>
+<ion-button expand="block" color="warning" routerLink="/checkout">
+  Προχωρήστε στην Αγορά
+</ion-button>
+
   </div>
 </ion-content>
