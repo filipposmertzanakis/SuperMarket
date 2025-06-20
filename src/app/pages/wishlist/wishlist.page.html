@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Λίστα Επιθυμιών</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-spinner *ngIf="loading"></ion-spinner>
+
+  <ion-list *ngIf="products.length > 0; else empty">
+    <ion-item *ngFor="let product of products">
+      <ion-label>
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price | number:'1.2-2' }} €</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="remove(product.id)">
+        Αφαίρεση
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #empty>
+    <p>Δεν υπάρχουν προϊόντα στη λίστα επιθυμιών.</p>
+  </ng-template>
+</ion-content>

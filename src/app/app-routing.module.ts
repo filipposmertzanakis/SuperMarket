@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'order-history',
     loadChildren: () => import('./pages/order-history/order-history.module').then( m => m.OrderHistoryPageModule)
   },
+  {
+    path: 'wishlist',
+    loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
+  },
 ];
 
 @NgModule({

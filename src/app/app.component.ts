@@ -11,7 +11,7 @@ export class AppComponent {
     { title: 'Αρχική', url: '/home', icon: 'home' },
     { title: 'Λίστα Αγορών', url: '/cart', icon: 'cart' },
     { title: 'Λίστα Επιθυμιών', url: '/wishlist', icon: 'heart' },
-    { title: 'Ιστορικό Αγορών', url: '/history', icon: 'time' }
+    { title: 'Ιστορικό Αγορών', url: '/order-history', icon: 'time' }
   ];
 
   constructor() {}

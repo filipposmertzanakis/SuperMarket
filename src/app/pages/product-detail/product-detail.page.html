@@ -31,7 +31,7 @@
       <ion-button expand="block" color="success"  (click)="addToCart()" [disabled]="!product?.availability">
         ➕ Προσθήκη στο καλάθι
       </ion-button>
-      <ion-button expand="block" fill="outline" color="medium">
+      <ion-button expand="block" fill="outline" color="medium" (click)="addToWishlist(product.id)">
         💾 Αποθήκευση στη λίστα επιθυμιών
       </ion-button>
     </ion-card-content>
