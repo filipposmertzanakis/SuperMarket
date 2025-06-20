@@ -12,25 +12,29 @@
     <img [src]="product.image" alt="εικόνα προϊόντος" />
 
     <ion-card-header>
-      <ion-card-title>{{ product.name }}</ion-card-title>
-      <ion-card-subtitle>{{ product.unit }} - {{ product.price | currency:'EUR':'symbol' }}</ion-card-subtitle>
+      <ion-card-title>{{ product.title }}</ion-card-title>
+      <ion-card-subtitle>{{ product.price | currency:'EUR':'symbol' }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
       <p>{{ product.description }}</p>
       <p><strong>Διατροφική αξία:</strong> {{ product.nutrition }}</p>
       <p><strong>Διαθεσιμότητα:</strong>
-        <ion-badge [color]="product.available ? 'success' : 'danger'">
-          {{ product.available ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
+        <ion-badge [color]="product.availability ? 'success' : 'danger'">
+          {{ product.availability ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
+          {{product.stock}} τεμάχια
+        <ion-icon name="checkmark-circle" *ngIf="product.availability"></ion-icon>
         </ion-badge>
+
       </p>
 
-      <ion-button expand="block" color="success">
-        ➕ Προσθήκη στη λίστα αγορών
+      <ion-button expand="block" color="success"  (click)="addToCart()" [disabled]="!product?.availability">
+        ➕ Προσθήκη στο καλάθι
       </ion-button>
       <ion-button expand="block" fill="outline" color="medium">
         💾 Αποθήκευση στη λίστα επιθυμιών
       </ion-button>
     </ion-card-content>
   </ion-card>
+
 </ion-content>

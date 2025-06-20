@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Καλάθι Αγορών</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="cartItems.length > 0; else emptyCart">
+    <ion-item *ngFor="let item of cartItems">
+      <ion-label>
+        <h2>{{ item.title }}</h2>
+        <p>Τιμή: {{ item.price | number:'1.2-2' }} €</p>
+      </ion-label>
+      <ion-input
+        type="number"
+        min="1"
+        [value]="item.quantity"
+        (ionChange)="updateQuantity(item, $event)"
+        style="width: 60px;"
+      ></ion-input>
+      <ion-button color="danger" fill="clear" (click)="removeItem(item)">
+        Αφαίρεση
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #emptyCart>
+    <p>Το καλάθι είναι άδειο.</p>
+  </ng-template>
+
+  <div *ngIf="cartItems.length > 0" class="ion-margin-top">
+    <h2>Σύνολο: {{ total | number:'1.2-2' }} €</h2>
+    <ion-button expand="block" color="success" (click)="checkout()">
+      Ολοκλήρωση Αγοράς
+    </ion-button>
+  </div>
+</ion-content>

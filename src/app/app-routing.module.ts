@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'seed-products',
     loadChildren: () => import('./pages/seed-products/seed-products.module').then( m => m.SeedProductsPageModule)
   },
+  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
 ];
 
 @NgModule({

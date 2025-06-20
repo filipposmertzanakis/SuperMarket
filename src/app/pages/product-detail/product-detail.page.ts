@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FirestoreService } from '../../services/firestore.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,21 +13,39 @@ export class ProductDetailPage implements OnInit {
   productId: string | null = null;
   product: any = null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute , private firestoreService: FirestoreService , private cartService: CartService) {}
 
   ngOnInit() {
 
-    this.productId = this.route.snapshot.paramMap.get('id');
-    // 🔁 Για τώρα μπορούμε να βάλουμε mock δεδομένα. Αργότερα θα φέρνουμε από βάση.
-    this.product = {
-      id: this.productId,
-      name: 'Γάλα 1L',
-      description: 'Φρέσκο γάλα αγελάδος.',
-      image: 'https://via.placeholder.com/300x200',
-      price: 1.20,
-      unit: '€/τεμάχιο',
-      available: true,
-      nutrition: 'Πρωτεΐνη, Ασβέστιο, Βιταμίνη D',
-    };
+    this.route.paramMap.subscribe(params => {
+      this.productId = params.get('id');
+      if (this.productId) {
+        this.firestoreService.getProductById(this.productId).subscribe(product => {
+          this.product = product;
+          console.log('Product details:', this.product);
+        });
+      }
+    });
+
+    
+
+    
+
+    
+
   }
+
+  addToCart() {
+  if (!this.product) return;
+
+  this.cartService.addToCart({
+    productId: this.productId!,
+    title: this.product.title,
+    price: this.product.price,
+    quantity: 1
+  });
+
+  alert(`${this.product.title} προστέθηκε στο καλάθι!`);
+}
+
 }
