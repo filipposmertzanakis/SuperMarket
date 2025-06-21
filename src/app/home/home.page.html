@@ -1,109 +1,121 @@
+<!-- [1] HEADER: Clean, singular header for the page -->
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title>Αρχική</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
+<!-- [2] CONTENT: Single content area for the entire page -->
 <ion-content class="ion-padding">
 
-  <!-- Logged In User Info -->
+  <!-- User Greeting & Actions Card -->
   <ng-container *ngIf="isLoggedIn; else notLoggedIn">
-    <ion-card>
+    <ion-card class="user-card">
       <ion-card-header>
-        <ion-card-title>Καλώς ήρθες, {{ userEmail }}</ion-card-title>
+        <ion-card-subtitle>Καλώς ήρθες ξανά,</ion-card-subtitle>
+        <ion-card-title>{{ userEmail }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-button expand="block" color="danger" (click)="logout()">Αποσύνδεση</ion-button>
-        <ion-button expand="block"  routerLink="/order-history">
-          Ιστορικό Αγορών
-        </ion-button>
-        <ion-button expand="block" routerLink="/wishlist">
-          Λίστα Επιθυμιών 💖
-        </ion-button>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-button expand="block" routerLink="/order-history">
+                <ion-icon name="receipt-outline" slot="start"></ion-icon>
+                Ιστορικό Αγορών
+              </ion-button>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button expand="block" routerLink="/wishlist" fill="outline">
+                <ion-icon name="heart-outline" slot="start"></ion-icon>
+                Λίστα Επιθυμιών
+              </ion-button>
+            </ion-col>
+             <ion-col size="12">
+              <ion-button expand="block" fill="clear" color="danger" (click)="logout()">
+                <ion-icon name="log-out-outline" slot="start"></ion-icon>
+                Αποσύνδεση
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </ng-container>
 
-  <!-- Not Logged In -->
+  <!-- Guest User Card -->
   <ng-template #notLoggedIn>
-    <ion-card>
-      <ion-card-header>
+    <ion-card class="user-card">
+      <ion-card-header class="ion-text-center">
         <ion-card-title>Καλώς ήρθες!</ion-card-title>
+        <ion-card-subtitle>Συνδέσου για να δεις τις προσφορές</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-button expand="block" color="primary" (click)="goToLogin()">Σύνδεση</ion-button>
-        <ion-button expand="block" color="medium" (click)="goToRegister()">Εγγραφή</ion-button>
+        <ion-button expand="block" (click)="goToLogin()">Σύνδεση</ion-button>
+        <ion-button expand="block" fill="outline" (click)="goToRegister()">Δημιουργία Λογαριασμού</ion-button>
       </ion-card-content>
     </ion-card>
   </ng-template>
 
-  <!-- Categories -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Κατηγορίες Προϊόντων</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6" sizeMd="3">
-            <ion-button expand="block" fill="outline" routerLink="/category/fresh">
-              🥬 Φρέσκα τρόφιμα
-            </ion-button>
-          </ion-col>
-          <ion-col size="6" sizeMd="3">
-            <ion-button expand="block" fill="outline" routerLink="/category/dairy">
-              🧀 Γαλακτοκομικά
-            </ion-button>
-          </ion-col>
-          <ion-col size="6" sizeMd="3">
-            <ion-button expand="block" fill="outline" routerLink="/category/frozen">
-              ❄️ Κατεψυγμένα
-            </ion-button>
-          </ion-col>
-          <ion-col size="6" sizeMd="3">
-            <ion-button expand="block" fill="outline" routerLink="/category/cleaning">
-              🧽 Καθαριστικά
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+  
+  <!-- Categories Section (no card for a cleaner look) -->
+  <h2 class="section-title">Κατηγορίες</h2>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="6" size-md="3">
+        <ion-button class="category-button" expand="block" fill="outline" routerLink="/category/fresh">
+          🥬 <span class="category-text">Φρέσκα</span>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button class="category-button" expand="block" fill="outline" routerLink="/category/dairy">
+          🧀 <span class="category-text">Γαλακτοκομικά</span>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button class="category-button" expand="block" fill="outline" routerLink="/category/frozen">
+          ❄️ <span class="category-text">Κατεψυγμένα</span>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-button class="category-button" expand="block" fill="outline" routerLink="/category/cleaning">
+          🧽 <span class="category-text">Καθαριστικά</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <!-- View All Products -->
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Προϊόντα</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding">
-
-  <!-- Category Filter Buttons -->
+  <!-- Products Section -->
+  <h2 class="section-title">Προϊόντα</h2>
+  
+  <!-- Category Filter Segment -->
   <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
+    <ion-segment-button value="all">Όλα</ion-segment-button>
     <ion-segment-button *ngFor="let cat of categories" [value]="cat">
       {{ cat }}
     </ion-segment-button>
   </ion-segment>
 
-  <!-- Products List -->
+  <!-- Products Grid -->
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of filteredProducts">
         <ion-card button [routerLink]="['/product-detail', product.id]">
+          <!-- <img [src]="product.imageUrl || 'assets/placeholder.png'" alt="{{ product.title }}" /> -->
           <ion-card-header>
             <ion-card-title>{{ product.title }}</ion-card-title>
             <ion-card-subtitle>{{ product.price }} €</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <p>{{ product.description }}</p>
-            <p *ngIf="!product.availability" style="color:red;">Μη διαθέσιμο</p>
+            <!-- Use a class instead of inline style for unavailability -->
+            <p [ngClass]="{'product-unavailable': !product.availability}">
+              {{ product.description }}
+            </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-</ion-content>
 
 </ion-content>

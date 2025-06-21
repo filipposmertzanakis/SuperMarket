@@ -1,27 +1,54 @@
-#container {
-  text-align: center;
+/* --- [6] COMPONENT-SPECIFIC STYLES --- */
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+/* Section Titles (for h2 elements) */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ion-color-text);
+  margin-top: 32px;
+  margin-bottom: 16px;
+  padding-left: 4px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* Category Buttons for a cleaner, more modern grid */
+.category-button {
+  --border-color: var(--ion-color-border);
+  --color: var(--ion-color-text-muted);
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem; /* For the emoji */
+}
+.category-button .category-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 4px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+/* User Card specific styles */
+.user-card ion-button[color="danger"] {
+  --color: #f87171; /* A softer red for text buttons (Red 400) */
 }
 
-#container a {
-  text-decoration: none;
+/* Product Card Improvements */
+ion-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* Ensures images fill the space without distortion */
+}
+
+/* Class to replace inline style="color:red" */
+.product-unavailable {
+  color: #f87171; /* Softer Red */
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Add a proper style for outline danger buttons */
+ion-button[fill="outline"][color="danger"] {
+  --border-color: #ef4444;
+  --color: #ef4444;
+}
+ion-button[fill="outline"][color="danger"]:hover {
+   --background: rgba(239, 68, 68, 0.1);
 }
