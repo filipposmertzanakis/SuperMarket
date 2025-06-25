@@ -71,7 +71,7 @@
   
   <!-- Category Filter Segment -->
   <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
-    <ion-segment-button value="all">Όλα</ion-segment-button>
+    
     <ion-segment-button *ngFor="let cat of categories" [value]="cat">
       {{ cat }}
     </ion-segment-button>

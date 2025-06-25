@@ -13,7 +13,7 @@ interface Product {
   availability: boolean;
   stock: number;
   category: string;
-    imageUrl?: string;
+  imageUrl?: string;
 }
 
 @Component({
@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
       if (category === 'All') {
         this.filteredProducts = products;
       } else {
-        this.filteredProducts = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        this.filteredProducts = products.filter(p => p.category === category);
       }
     });
   }
