@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MenuController } from '@ionic/angular';
 
 interface Product {
   id: string;
@@ -29,7 +30,7 @@ export class HomePage implements OnInit {
   categories = ['All', 'Fresh', 'Dairy', 'Frozen', 'Cleaning'];
   selectedCategory = 'All';
 
-  constructor(private authService: AuthService, private router: Router, private firestore: Firestore) {}
+  constructor(private authService: AuthService, private router: Router, private firestore: Firestore, private menu: MenuController ) {}
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
@@ -42,6 +43,10 @@ export class HomePage implements OnInit {
     this.products$.subscribe(products => {
       this.filteredProducts = products;
     });
+  }
+
+  ionViewWillEnter() {
+  this.menu.enable(true); // <- enables menu when user navigates to home
   }
 
   logout() {
