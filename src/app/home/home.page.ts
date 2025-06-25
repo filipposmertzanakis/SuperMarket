@@ -13,6 +13,7 @@ interface Product {
   availability: boolean;
   stock: number;
   category: string;
+    imageUrl?: string;
 }
 
 @Component({

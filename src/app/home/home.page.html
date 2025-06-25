@@ -106,7 +106,7 @@
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of filteredProducts">
         <ion-card button [routerLink]="['/product-detail', product.id]">
-          <!-- <img [src]="product.imageUrl || 'assets/placeholder.png'" alt="{{ product.title }}" /> -->
+          <img [src]="product.imageUrl || 'assets/placeholder.png'" alt="{{ product.title }}" />
           <ion-card-header>
             <ion-card-title>{{ product.title }}</ion-card-title>
             <ion-card-subtitle>{{ product.price }} €</ion-card-subtitle>
