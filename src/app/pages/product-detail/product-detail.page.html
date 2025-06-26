@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Προϊόν</ion-title>
+    <ion-title>{{ 'PRODUCT' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-card *ngIf="product">
-    <img [src]="product.imageUrl" alt="εικόνα προϊόντος" />
+    <img [src]="product.imageUrl" alt="{{ 'PRODUCT_IMAGE' | translate }}" />
 
     <ion-card-header>
       <ion-card-title>{{ product.title }}</ion-card-title>
@@ -18,23 +18,21 @@
 
     <ion-card-content>
       <p>{{ product.description }}</p>
-      <p><strong>Διατροφική αξία:</strong> {{ product.nutrition }}</p>
-      <p><strong>Διαθεσιμότητα:</strong>
+      <p><strong>{{ 'NUTRITION' | translate }}:</strong> {{ product.nutrition }}</p>
+      <p><strong>{{ 'AVAILABILITY' | translate }}:</strong>
         <ion-badge [color]="product.availability ? 'success' : 'danger'">
-          {{ product.availability ? 'Διαθέσιμο' : 'Εξαντλημένο' }}
-          {{product.stock}} τεμάχια
-        <ion-icon name="checkmark-circle" *ngIf="product.availability"></ion-icon>
+          {{ product.availability ? ('AVAILABLE' | translate) : ('OUT_OF_STOCK' | translate) }}
+          {{ product.stock }} {{ 'PIECES' | translate }}
+          <ion-icon name="checkmark-circle" *ngIf="product.availability"></ion-icon>
         </ion-badge>
-
       </p>
 
-      <ion-button expand="block" color="success"  (click)="addToCart()" [disabled]="!product?.availability">
-        ➕ Προσθήκη στο καλάθι
+      <ion-button expand="block" color="success" (click)="addToCart()" [disabled]="!product?.availability">
+        ➕ {{ 'ADD_TO_CART' | translate }}
       </ion-button>
       <ion-button expand="block" fill="outline" color="medium" (click)="addToWishlist(product.id)">
-        💾 Αποθήκευση στη λίστα επιθυμιών
+        💾 {{ 'SAVE_TO_WISHLIST' | translate }}
       </ion-button>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

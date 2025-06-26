@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { OrderHistoryPage } from './order-history.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { OrderHistoryPage } from './order-history.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     OrderHistoryPageRoutingModule
   ],
   declarations: [OrderHistoryPage]

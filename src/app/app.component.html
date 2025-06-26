@@ -3,6 +3,11 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Supermarket App</ion-title>
+        <ion-buttons slot="end">
+          <ion-button expand="full" (click)="toggleLanguage()">
+            {{ 'CHANGE_LANG' | translate }}
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -10,7 +15,7 @@
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
           <ion-item [routerLink]="p.url" routerDirection="root">
             <ion-icon [name]="p.icon" slot="start"></ion-icon>
-            <ion-label>{{ p.title }}</ion-label>
+            <ion-label>{{ p.title | translate }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

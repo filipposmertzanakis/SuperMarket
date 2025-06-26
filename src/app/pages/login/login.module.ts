@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPageRoutingModule } from './login-routing.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { LoginPage } from './login.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { LoginPage } from './login.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     LoginPageRoutingModule
   ],
   declarations: [LoginPage]

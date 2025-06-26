@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CartPageRoutingModule } from './cart-routing.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { CartPage } from './cart.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { CartPage } from './cart.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CartPageRoutingModule
   ],
   declarations: [CartPage]

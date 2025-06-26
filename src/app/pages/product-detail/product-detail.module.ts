@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ProductDetailPageRoutingModule } from './product-detail-routing.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { ProductDetailPage } from './product-detail.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { ProductDetailPage } from './product-detail.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     ProductDetailPageRoutingModule
   ],
   declarations: [ProductDetailPage]

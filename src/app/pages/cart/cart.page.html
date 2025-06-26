@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Καλάθι Αγορών</ion-title>
+    <ion-title>{{ 'CART' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
     <ion-item *ngFor="let item of cartItems">
       <ion-label>
         <h2>{{ item.title }}</h2>
-        <p>Τιμή: {{ item.price | number:'1.2-2' }} €</p>
+        <p>{{ 'PRICE' | translate }}: {{ item.price | number:'1.2-2' }} €</p>
       </ion-label>
       <ion-input
         type="number"
@@ -19,20 +19,19 @@
         style="width: 60px;"
       ></ion-input>
       <ion-button color="danger" fill="clear" (click)="removeItem(item)">
-        Αφαίρεση
+        {{ 'REMOVE' | translate }}
       </ion-button>
     </ion-item>
   </ion-list>
 
   <ng-template #emptyCart>
-    <p>Το καλάθι είναι άδειο.</p>
+    <p>{{ 'CART_EMPTY' | translate }}</p>
   </ng-template>
 
   <div *ngIf="cartItems.length > 0" class="ion-margin-top">
-    <h2>Σύνολο: {{ total | number:'1.2-2' }} €</h2>
-<ion-button expand="block" color="warning" routerLink="/checkout">
-  Προχωρήστε στην Αγορά
-</ion-button>
-
+    <h2>{{ 'TOTAL' | translate }}: {{ total | number:'1.2-2' }} €</h2>
+    <ion-button expand="block" color="warning" routerLink="/checkout">
+      {{ 'PROCEED_TO_CHECKOUT' | translate }}
+    </ion-button>
   </div>
 </ion-content>

@@ -1,21 +1,21 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Εγγραφή</ion-title>
+    <ion-title>{{ 'REGISTER1' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">Email</ion-label>
+      <ion-label position="stacked">{{ 'EMAIL' | translate }}</ion-label>
       <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Κωδικός</ion-label>
+      <ion-label position="stacked">{{ 'PASSWORD' | translate }}</ion-label>
       <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="block" color="success" (click)="register()">Εγγραφή</ion-button>
+  <ion-button expand="block" color="success" (click)="register()">{{ 'REGISTER1' | translate }}</ion-button>
   <ion-text *ngIf="message"><p>{{ message }}</p></ion-text>
 </ion-content>

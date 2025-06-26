@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService, CartItem } from 'src/app/services/cart.service';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkout',
@@ -21,7 +22,12 @@ export class CheckoutPage implements OnInit {
   loading = false;
   message = '';
 
-  constructor(private cartService: CartService, private firestore: Firestore , private authService: AuthService) {}
+  constructor(
+    private cartService: CartService,
+    private firestore: Firestore,
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.cartService.getCart().subscribe(items => {
@@ -32,13 +38,12 @@ export class CheckoutPage implements OnInit {
 
   async completeOrder() {
     if (!this.customer.name || !this.customer.email || this.cartItems.length === 0) {
-      this.message = '❌ Συμπληρώστε όλα τα πεδία!';
+      this.message = '❌ ' + this.translate.instant('FILL_ALL_FIELDS');
       return;
     }
 
     const userId = this.authService.getUserId();
 
-    
     this.loading = true;
 
     const order = {
@@ -50,16 +55,15 @@ export class CheckoutPage implements OnInit {
     };
 
     try {
-
       const ordersRef = collection(this.firestore, 'orders');
       await addDoc(ordersRef, order);
 
       this.cartService.clearCart();
-      this.message = '✅ Η παραγγελία καταχωρήθηκε επιτυχώς!';
+      this.message = '✅ ' + this.translate.instant('ORDER_SUCCESS');
       this.customer = { name: '', email: '' };
     } catch (error) {
       console.error(error);
-      this.message = '❌ Σφάλμα κατά την αποθήκευση της παραγγελίας.';
+      this.message = '❌ ' + this.translate.instant('ORDER_ERROR');
     }
 
     this.loading = false;

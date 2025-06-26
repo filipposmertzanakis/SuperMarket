@@ -4,20 +4,17 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Αρχική</ion-title>
+    <ion-title>{{ 'HOME' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-
-<!-- [2] CONTENT: Single content area for the entire page -->
 <ion-content class="ion-padding">
 
   <!-- User Greeting & Actions Card -->
   <ng-container *ngIf="isLoggedIn; else notLoggedIn">
     <ion-card class="user-card">
       <ion-card-header>
-        <ion-card-subtitle>Καλώς ήρθες ξανά,</ion-card-subtitle>
+        <ion-card-subtitle>{{ 'WELCOME_BACK' | translate }}</ion-card-subtitle>
         <ion-card-title>{{ userEmail }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
@@ -26,19 +23,19 @@
             <ion-col size="12">
               <ion-button expand="block" routerLink="/order-history">
                 <ion-icon name="receipt-outline" slot="start"></ion-icon>
-                Ιστορικό Αγορών
+                {{ 'ORDER_HISTORY' | translate }}
               </ion-button>
             </ion-col>
             <ion-col size="12">
               <ion-button expand="block" routerLink="/wishlist" fill="outline">
                 <ion-icon name="heart-outline" slot="start"></ion-icon>
-                Λίστα Επιθυμιών
+                {{ 'WISHLIST' | translate }}
               </ion-button>
             </ion-col>
-             <ion-col size="12">
+            <ion-col size="12">
               <ion-button expand="block" fill="clear" color="danger" (click)="logout()">
                 <ion-icon name="log-out-outline" slot="start"></ion-icon>
-                Αποσύνδεση
+                {{ 'LOGOUT' | translate }}
               </ion-button>
             </ion-col>
           </ion-row>
@@ -51,41 +48,33 @@
   <ng-template #notLoggedIn>
     <ion-card class="user-card">
       <ion-card-header class="ion-text-center">
-        <ion-card-title>Καλώς ήρθες!</ion-card-title>
-        <ion-card-subtitle>Συνδέσου για να δεις τις προσφορές</ion-card-subtitle>
+        <ion-card-title>{{ 'WELCOME' | translate }}</ion-card-title>
+        <ion-card-subtitle>{{ 'LOGIN_TO_SEE_OFFERS' | translate }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-button expand="block" (click)="goToLogin()">Σύνδεση</ion-button>
-        <ion-button expand="block" fill="outline" (click)="goToRegister()">Δημιουργία Λογαριασμού</ion-button>
+        <ion-button expand="block" (click)="goToLogin()">{{ 'LOGIN' | translate }}</ion-button>
+        <ion-button expand="block" fill="outline" (click)="goToRegister()">{{ 'REGISTER' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
   </ng-template>
 
-  
-  <!-- Categories Section (no card for a cleaner look) -->
-  
-
-
   <!-- Products Section -->
-  <h2 class="section-title">Προϊόντα</h2>
+  <h2 class="section-title">{{ 'PRODUCTS' | translate }}</h2>
   
   <!-- Category Filter Segment -->
   <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
-    
     <ion-segment-button *ngFor="let cat of categories" [value]="cat">
-      {{ cat }}
+      {{ cat | translate }}
     </ion-segment-button>
   </ion-segment>
   
   <ion-item>
-  <ion-label>Ταξινόμηση</ion-label>
-  <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
-    <ion-select-option value="asc">Τιμή: Αύξουσα</ion-select-option>
-    <ion-select-option value="desc">Τιμή: Φθίνουσα</ion-select-option>
-  </ion-select>
-</ion-item>
-
-
+    <ion-label>{{ 'SORT' | translate }}</ion-label>
+    <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
+      <ion-select-option value="asc">{{ 'PRICE_ASC' | translate }}</ion-select-option>
+      <ion-select-option value="desc">{{ 'PRICE_DESC' | translate }}</ion-select-option>
+    </ion-select>
+  </ion-item>
 
   <!-- Products Grid -->
   <ion-grid>
@@ -94,11 +83,10 @@
         <ion-card button [routerLink]="['/product-detail', product.id]">
           <img [src]="product.imageUrl || 'assets/placeholder.png'" alt="{{ product.title }}" />
           <ion-card-header>
-            <ion-card-title>{{ product.title }}</ion-card-title>
+            <ion-card-title>{{ product.title[currentLang] }}</ion-card-title>
             <ion-card-subtitle>{{ product.price }} €</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <!-- Use a class instead of inline style for unavailability -->
             <p [ngClass]="{'product-unavailable': !product.availability}">
               {{ product.description }}
             </p>

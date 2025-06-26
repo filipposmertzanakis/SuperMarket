@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Αρχική', url: '/home', icon: 'home' },
-    { title: 'Λίστα Αγορών', url: '/cart', icon: 'cart' },
-    { title: 'Λίστα Επιθυμιών', url: '/wishlist', icon: 'heart' },
-    { title: 'Ιστορικό Αγορών', url: '/order-history', icon: 'time' }
+    { title: 'HOME', url: '/home', icon: 'home' },
+    { title: 'CART', url: '/cart', icon: 'cart' },
+    { title: 'WISHLIST', url: '/wishlist', icon: 'heart' },
+    { title: 'ORDER_HISTORY', url: '/order-history', icon: 'time' }
   ];
 
-  constructor() {}
+  currentLang = 'el';
+
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('el');
+    this.translate.use(this.currentLang);
+  }
+
+  toggleLanguage() {
+    this.currentLang = this.currentLang === 'en' ? 'el' : 'en';
+    this.translate.use(this.currentLang);
+  }
 }

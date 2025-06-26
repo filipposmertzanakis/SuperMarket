@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core'; // <-- Add this import
 
 interface Product {
   id: string;
-  title: string;
-  description: string;
+  title: any; // Change to 'any' to support {en:..., el:...}
+  description: any;
   price: number;
   availability: boolean;
   stock: number;
@@ -33,8 +34,20 @@ export class HomePage implements OnInit {
 
   sortOrder: 'asc' | 'desc' = 'asc';
 
+  currentLang: string; // <-- Add this property
 
-  constructor(private authService: AuthService, private router: Router, private firestore: Firestore, private menu: MenuController ) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private firestore: Firestore,
+    private menu: MenuController,
+    private translate: TranslateService // <-- Inject TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });
+  }
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
@@ -50,7 +63,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-  this.menu.enable(true); // <- enables menu when user navigates to home
+    this.menu.enable(true); // <- enables menu when user navigates to home
   }
 
   logout() {
@@ -78,14 +91,15 @@ export class HomePage implements OnInit {
       this.sortProducts();
     });
   }
+
   sortProducts() {
-  this.filteredProducts.sort((a, b) => {
-    if (this.sortOrder === 'asc') {
-      return a.price - b.price;
-    } else {
-      return b.price - a.price;
-    }
-  });
-}
+    this.filteredProducts.sort((a, b) => {
+      if (this.sortOrder === 'asc') {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+  }
 
 }

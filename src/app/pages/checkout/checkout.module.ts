@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CheckoutPageRoutingModule } from './checkout-routing.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { CheckoutPage } from './checkout.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { CheckoutPage } from './checkout.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CheckoutPageRoutingModule
   ],
   declarations: [CheckoutPage]

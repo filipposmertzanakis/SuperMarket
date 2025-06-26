@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Ολοκλήρωση Αγοράς</ion-title>
+    <ion-title>{{ 'CHECKOUT' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,31 +10,31 @@
     <ion-item *ngFor="let item of cartItems">
       <ion-label>
         <h2>{{ item.title }}</h2>
-        <p>Ποσότητα: {{ item.quantity }}</p>
-        <p>Τιμή: {{ item.price }} €</p>
+        <p>{{ 'QUANTITY' | translate }}: {{ item.quantity }}</p>
+        <p>{{ 'PRICE' | translate }}: {{ item.price }} €</p>
       </ion-label>
     </ion-item>
   </ion-list>
 
   <ion-card *ngIf="cartItems.length > 0">
     <ion-card-content>
-      <h3>Σύνολο: {{ total | number:'1.2-2' }} €</h3>
+      <h3>{{ 'TOTAL' | translate }}: {{ total | number:'1.2-2' }} €</h3>
     </ion-card-content>
   </ion-card>
 
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">Όνομα</ion-label>
+      <ion-label position="stacked">{{ 'NAME' | translate }}</ion-label>
       <ion-input [(ngModel)]="customer.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Email</ion-label>
+      <ion-label position="stacked">{{ 'EMAIL' | translate }}</ion-label>
       <ion-input type="email" [(ngModel)]="customer.email"></ion-input>
     </ion-item>
   </ion-list>
 
   <ion-button expand="block" color="success" (click)="completeOrder()" [disabled]="loading">
-    {{ loading ? 'Αποστολή...' : 'Ολοκλήρωση Αγοράς' }}
+    {{ loading ? ('SENDING' | translate) : ('COMPLETE_ORDER' | translate) }}
   </ion-button>
 
   <ion-text *ngIf="message" [color]="message.startsWith('✅') ? 'success' : 'danger'">

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Λίστα Επιθυμιών</ion-title>
+    <ion-title>{{ 'WISHLIST' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,12 +14,12 @@
         <p>{{ product.price | number:'1.2-2' }} €</p>
       </ion-label>
       <ion-button fill="clear" color="danger" (click)="remove(product.id)">
-        Αφαίρεση
+        {{ 'REMOVE' | translate }}
       </ion-button>
     </ion-item>
   </ion-list>
 
   <ng-template #empty>
-    <p>Δεν υπάρχουν προϊόντα στη λίστα επιθυμιών.</p>
+    <p>{{ 'WISHLIST_EMPTY' | translate }}</p>
   </ng-template>
 </ion-content>
