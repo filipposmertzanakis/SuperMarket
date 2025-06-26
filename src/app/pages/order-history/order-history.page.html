@@ -1,8 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Ιστορικό Αγορών</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/cart" fill="clear">
+        <ion-icon slot="start" name="cart-outline"></ion-icon>
+        Πήγαινε στο καλάθι
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content class="ion-padding">
   <ion-spinner *ngIf="loading"></ion-spinner>
