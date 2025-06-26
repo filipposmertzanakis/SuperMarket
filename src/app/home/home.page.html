@@ -76,6 +76,16 @@
       {{ cat }}
     </ion-segment-button>
   </ion-segment>
+  
+  <ion-item>
+  <ion-label>Ταξινόμηση</ion-label>
+  <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
+    <ion-select-option value="asc">Τιμή: Αύξουσα</ion-select-option>
+    <ion-select-option value="desc">Τιμή: Φθίνουσα</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
 
   <!-- Products Grid -->
   <ion-grid>

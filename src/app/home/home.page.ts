@@ -31,6 +31,9 @@ export class HomePage implements OnInit {
   categories = ['All', 'Fresh', 'Dairy', 'Frozen', 'Cleaning'];
   selectedCategory = 'All';
 
+  sortOrder: 'asc' | 'desc' = 'asc';
+
+
   constructor(private authService: AuthService, private router: Router, private firestore: Firestore, private menu: MenuController ) {}
 
   ngOnInit() {
@@ -72,6 +75,17 @@ export class HomePage implements OnInit {
       } else {
         this.filteredProducts = products.filter(p => p.category === category);
       }
+      this.sortProducts();
     });
   }
+  sortProducts() {
+  this.filteredProducts.sort((a, b) => {
+    if (this.sortOrder === 'asc') {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
+}
+
 }
