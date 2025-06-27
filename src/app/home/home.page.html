@@ -12,76 +12,128 @@
 
   <!-- User Greeting & Actions Card -->
   <ng-container *ngIf="isLoggedIn; else notLoggedIn">
-    <ion-card class="user-card">
+    <ion-card class="user-card ion-margin-bottom">
       <ion-card-header>
         <ion-card-subtitle>{{ 'WELCOME_BACK' | translate }}</ion-card-subtitle>
         <ion-card-title>{{ userEmail }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12">
-              <ion-button expand="block" routerLink="/order-history">
-                <ion-icon name="receipt-outline" slot="start"></ion-icon>
-                {{ 'ORDER_HISTORY' | translate }}
-              </ion-button>
-            </ion-col>
-            <ion-col size="12">
-              <ion-button expand="block" routerLink="/wishlist" fill="outline">
-                <ion-icon name="heart-outline" slot="start"></ion-icon>
-                {{ 'WISHLIST' | translate }}
-              </ion-button>
-            </ion-col>
-            <ion-col size="12">
-              <ion-button expand="block" fill="clear" color="danger" (click)="logout()">
-                <ion-icon name="log-out-outline" slot="start"></ion-icon>
-                {{ 'LOGOUT' | translate }}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-button expand="block" routerLink="/order-history" class="ion-margin-bottom">
+          <ion-icon name="receipt-outline" slot="start"></ion-icon>
+          {{ 'ORDER_HISTORY' | translate }}
+        </ion-button>
+        <ion-button expand="block" routerLink="/wishlist" fill="outline" class="ion-margin-bottom">
+          <ion-icon name="heart-outline" slot="start"></ion-icon>
+          {{ 'WISHLIST' | translate }}
+        </ion-button>
+        <ion-button expand="block" fill="clear" color="danger" (click)="logout()">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          {{ 'LOGOUT' | translate }}
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </ng-container>
 
   <!-- Guest User Card -->
   <ng-template #notLoggedIn>
-    <ion-card class="user-card">
+    <ion-card class="user-card ion-margin-bottom">
       <ion-card-header class="ion-text-center">
         <ion-card-title>{{ 'WELCOME' | translate }}</ion-card-title>
         <ion-card-subtitle>{{ 'LOGIN_TO_SEE_OFFERS' | translate }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-button expand="block" (click)="goToLogin()">{{ 'LOGIN' | translate }}</ion-button>
-        <ion-button expand="block" fill="outline" (click)="goToRegister()">{{ 'REGISTER' | translate }}</ion-button>
+        <ion-button expand="block" class="ion-margin-bottom" (click)="goToLogin()">
+          {{ 'LOGIN' | translate }}
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="goToRegister()">
+          {{ 'REGISTER' | translate }}
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </ng-template>
 
   <!-- Products Section -->
-  <h2 class="section-title">{{ 'PRODUCTS' | translate }}</h2>
-  
-  <!-- Category Filter Segment -->
-  <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
-    <ion-segment-button *ngFor="let cat of categories" [value]="cat">
-      {{ cat | translate }}
-    </ion-segment-button>
-  </ion-segment>
-  
-  <ion-item>
-    <ion-label>{{ 'SORT' | translate }}</ion-label>
-    <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
-      <ion-select-option value="asc">{{ 'PRICE_ASC' | translate }}</ion-select-option>
-      <ion-select-option value="desc">{{ 'PRICE_DESC' | translate }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <h2 class="section-title ion-margin-top">{{ 'PRODUCTS' | translate }}</h2>
+
+  <!-- Filters Card -->
+  <ion-card class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>{{ 'FILTERS' | translate }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <!-- Category Filter Segment -->
+      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
+        <ion-segment-button *ngFor="let cat of categories" [value]="cat">
+          {{ cat | translate }}
+        </ion-segment-button>
+      </ion-segment>
+
+      <!-- Sort Order Select -->
+      <ion-item lines="none">
+        <ion-label>{{ 'SORT' | translate }}</ion-label>
+        <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
+          <ion-select-option value="asc">{{ 'PRICE_ASC' | translate }}</ion-select-option>
+          <ion-select-option value="desc">{{ 'PRICE_DESC' | translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Search Input -->
+      <ion-item lines="none">
+        <ion-label position="floating">{{ 'SEARCH' | translate }}</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (ionInput)="onSearchTermChange($event.detail.value ?? '')"
+          clearInput
+        ></ion-input>
+      </ion-item>
+
+      <!-- Price Range Filters -->
+      <ion-grid class="ion-padding-top">
+        <ion-row>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-label position="floating">{{ 'MIN_PRICE' | translate }}</ion-label>
+              <ion-input
+                type="number"
+                [(ngModel)]="minPrice"
+                (ionInput)="onMinPriceChange($event.detail.value)"
+                clearInput
+                min="0"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-label position="floating">{{ 'MAX_PRICE' | translate }}</ion-label>
+              <ion-input
+                type="number"
+                [(ngModel)]="maxPrice"
+                (ionInput)="onMaxPriceChange($event.detail.value)"
+                clearInput
+                min="0"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Discount Toggle -->
+      <ion-item lines="none">
+        <ion-label>{{ 'DISCOUNT_ONLY' | translate }}</ion-label>
+        <ion-toggle [(ngModel)]="filterDiscountOnly" (ionChange)="onDiscountToggle($event.detail.checked)"></ion-toggle>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
 
   <!-- Products Grid -->
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of filteredProducts">
-        <ion-card button [routerLink]="['/product-detail', product.id]">
-          <img [src]="product.imageUrl || 'assets/placeholder.png'" alt="{{ product.title }}" />
+        <ion-card button [routerLink]="['/product-detail', product.id]" class="ion-margin-bottom">
+          <img [src]="product.imageUrl || 'assets/placeholder.png'" [alt]="product.title[currentLang]" />
           <ion-card-header>
             <ion-card-title>{{ product.title[currentLang] }}</ion-card-title>
             <ion-card-subtitle>{{ product.price }} €</ion-card-subtitle>

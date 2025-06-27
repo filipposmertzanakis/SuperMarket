@@ -52,3 +52,19 @@ ion-button[fill="outline"][color="danger"] {
 ion-button[fill="outline"][color="danger"]:hover {
    --background: rgba(239, 68, 68, 0.1);
 }
+
+
+.search-item, .price-item {
+  --background: #f8f8f8;
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+ion-item {
+  --min-height: 40px;
+}
+
+ion-input {
+  font-size: 14px;
+}
