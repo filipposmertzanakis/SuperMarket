@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService, CartItem } from 'src/app/services/cart.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
@@ -10,8 +11,14 @@ import { CartService, CartItem } from 'src/app/services/cart.service';
 export class CartPage implements OnInit {
   cartItems: CartItem[] = [];
   total = 0;
+  currentLang: string;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private translate: TranslateService) {
+    this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });
+  }
 
   ngOnInit() {
     this.cartService.getCart().subscribe(items => {
@@ -36,7 +43,6 @@ export class CartPage implements OnInit {
   }
 
   checkout() {
-    // Placeholder - later implement checkout flow
     alert('Proceeding to checkout');
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
-import { CartService } from 'src/app/services/cart.service'; 
+import { CartService } from 'src/app/services/cart.service';
+import { TranslateService } from '@ngx-translate/core'; 
 
 @Component({
   selector: 'app-order-history',
@@ -12,8 +13,14 @@ import { CartService } from 'src/app/services/cart.service';
 export class OrderHistoryPage implements OnInit {
   orders: any[] = [];
   loading = true;
+  currentLang: string;
 
-  constructor(private firestore: Firestore, private authService: AuthService, private cartService: CartService) {}
+  constructor(private firestore: Firestore, private authService: AuthService, private cartService: CartService, private translate: TranslateService) {
+    this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });
+  }
 
   async ngOnInit() {
     const userId = this.authService.getUserId();

@@ -21,7 +21,7 @@
         <p>{{ 'PRODUCTS' | translate }}:</p>
         <ul>
           <li *ngFor="let item of order.items">
-            {{ item.title }} (x{{ item.quantity }}) - {{ item.price }} €
+            {{ item.title[currentLang] }} (x{{ item.quantity }}) - {{ item.price }} €
           </li>
         </ul>
       </ion-label>

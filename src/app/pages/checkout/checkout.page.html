@@ -9,7 +9,7 @@
   <ion-list *ngIf="cartItems.length > 0">
     <ion-item *ngFor="let item of cartItems">
       <ion-label>
-        <h2>{{ item.title }}</h2>
+        <h2>{{ item.title[currentLang] }}</h2>
         <p>{{ 'QUANTITY' | translate }}: {{ item.quantity }}</p>
         <p>{{ 'PRICE' | translate }}: {{ item.price }} €</p>
       </ion-label>

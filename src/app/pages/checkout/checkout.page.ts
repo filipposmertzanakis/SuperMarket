@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CheckoutPage implements OnInit {
   cartItems: CartItem[] = [];
   total: number = 0;
+  currentLang: string;
 
   customer = {
     name: '',
@@ -27,7 +28,12 @@ export class CheckoutPage implements OnInit {
     private firestore: Firestore,
     private authService: AuthService,
     private translate: TranslateService
-  ) {}
+  ) {
+      this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+      this.translate.onLangChange.subscribe(lang => {
+        this.currentLang = lang.lang;
+      });
+  }
 
   ngOnInit() {
     this.cartService.getCart().subscribe(items => {

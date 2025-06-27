@@ -4,13 +4,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Firestore, collectionData, collection, doc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core'; 
 
 interface Product {
   id: string;
-  title: string;
+  title: { [lang: string]: string };
   price: number;
   availability: boolean;
-  description: string;
+  description: { [lang: string]: string };
   stock: number;
   category: string;
 }
@@ -26,13 +27,18 @@ export class WishlistPage implements OnInit {
   wishlistProductIds: string[] = [];
   products: Product[] = [];
   loading = true;
+  currentLang: string;
 
   constructor(
     private wishlistService: WishlistService,
     private authService: AuthService,
     private firestore: Firestore,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translate: TranslateService
+  ) {this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });}
 
 async ngOnInit() {
   try {

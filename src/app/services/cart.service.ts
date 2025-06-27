@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface CartItem {
   productId: string;
-  title: string;
+  title: { [lang: string]: string }; 
   price: number;
   quantity: number;
 }
