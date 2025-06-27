@@ -1,0 +1,4 @@
+Install Capacitor ->	npm install @capacitor/core @capacitor/cli
+Add Android	npx -> cap add android
+Sync Capacitor	-> npx cap sync android
+Open in Android Studio -> 	npx cap open android
