@@ -49,5 +49,9 @@
   "OUT_OF_STOCK": "Out of stock",
   "PIECES": "pieces",
   "ADD_TO_CART": "Add to cart",
-  "SAVE_TO_WISHLIST": "Save to wishlist"
+  "SAVE_TO_WISHLIST": "Save to wishlist",
+  "SEARCH": "Search",
+  "MIN_PRICE":"Min_Price",
+  "MAX_PRICE":"Max_Price",
+  "DISCOUNT_ONLY":"Discount Only"
 }
