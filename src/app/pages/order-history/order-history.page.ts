@@ -3,6 +3,7 @@ import { Firestore, collection, query, where, getDocs } from '@angular/fire/fire
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { TranslateService } from '@ngx-translate/core'; 
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-order-history',
@@ -14,6 +15,14 @@ export class OrderHistoryPage implements OnInit {
   orders: any[] = [];
   loading = true;
   currentLang: string;
+
+  chartData: ChartConfiguration<'bar'>['data'] | null = null;
+  chartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    plugins: {
+      legend: { display: false }
+    }
+  };
 
   constructor(private firestore: Firestore, private authService: AuthService, private cartService: CartService, private translate: TranslateService) {
     this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
@@ -39,6 +48,40 @@ export class OrderHistoryPage implements OnInit {
     }));
     
     this.loading = false;
+    this.prepareChartData();
+  }
+
+  prepareChartData() {
+    if (!this.orders || this.orders.length === 0) {
+      this.chartData = null;
+      return;
+    }
+
+    const now = new Date();
+    const lastWeek = new Date(now);
+    lastWeek.setDate(now.getDate() - 7);
+    const lastMonth = new Date(now);
+    lastMonth.setMonth(now.getMonth() - 1);
+
+    let weekTotal = 0;
+    let monthTotal = 0;
+
+    for (const order of this.orders) {
+      const orderDate = order.date.toDate ? order.date.toDate() : new Date(order.date);
+      if (orderDate >= lastWeek) weekTotal += order.total;
+      if (orderDate >= lastMonth) monthTotal += order.total;
+    }
+
+    this.chartData = {
+      labels: ['Last Week', 'Last Month'],
+      datasets: [
+        {
+          label: 'Expenditure (€)',
+          data: [weekTotal, monthTotal],
+          backgroundColor: ['#36A2EB', '#FFCE56']
+        }
+      ]
+    };
   }
 
   repeatOrder(order: any) {
