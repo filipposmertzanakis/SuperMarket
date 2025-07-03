@@ -20,7 +20,38 @@ export class OrderHistoryPage implements OnInit {
   chartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     plugins: {
-      legend: { display: false }
+      legend: {
+        display: true,
+        labels: {
+          color: 'white',
+          font: { size: 14, weight: 'bold' }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Expenditure Overview',
+        color: 'white',
+        font: { size: 18, weight: 'bold' }
+      },
+      tooltip: {
+        enabled: true,
+        backgroundColor: '#fff',
+        titleColor: 'white',
+        bodyColor: 'white',
+        borderColor: '#36A2EB',
+        borderWidth: 1
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#e0e0e0' },
+        ticks: { color: 'dark', font: { size: 13 } }
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e0e0e0' },
+        ticks: { color: '#222', font: { size: 13 } }
+      }
     }
   };
 
@@ -78,7 +109,12 @@ export class OrderHistoryPage implements OnInit {
         {
           label: 'Expenditure (€)',
           data: [weekTotal, monthTotal],
-          backgroundColor: ['#36A2EB', '#FFCE56']
+          backgroundColor: ['#36A2EB', '#FFCE56'],
+          borderColor: ['#1976d2', '#fbc02d'],
+          borderWidth: 2,
+          borderRadius: 8,
+          hoverBackgroundColor: ['#1976d2', '#fbc02d'],
+          hoverBorderColor: ['#1565c0', '#f9a825']
         }
       ]
     };

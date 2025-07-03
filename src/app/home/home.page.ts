@@ -137,20 +137,20 @@ export class HomePage implements OnInit {
     this.applyFilters();
   }
 
-onMinPriceChange(value: string | null | undefined) {
-  const parsed = parseFloat(value ?? '');
-  this.minPrice = isNaN(parsed) ? null : parsed;
-  this.applyFilters();
-}
+  onMinPriceChange(value: string | null | undefined) {
+    const parsed = parseFloat(value ?? '');
+    this.minPrice = isNaN(parsed) ? null : parsed;
+    this.applyFilters();
+  }
 
-onMaxPriceChange(value: string | null | undefined) {
-  const parsed = parseFloat(value ?? '');
-  this.maxPrice = isNaN(parsed) ? null : parsed;
-  this.applyFilters();
-}
+  onMaxPriceChange(value: string | null | undefined) {
+    const parsed = parseFloat(value ?? '');
+    this.maxPrice = isNaN(parsed) ? null : parsed;
+    this.applyFilters();
+  }
 
-  onDiscountToggle(value: boolean) {
-    this.filterDiscountOnly = value;
+  onDiscountToggle(checked: boolean) {
+    this.filterDiscountOnly = checked;
     this.applyFilters();
   }
 }

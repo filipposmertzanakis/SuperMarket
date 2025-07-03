@@ -1,0 +1,42 @@
+/* Center the chart and add padding */
+.expenditure-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  background: #f8fafc;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+/* Responsive canvas */
+.expenditure-chart-container canvas {
+  max-width: 100% !important;
+  height: 320px !important;
+}
+
+/* Optional: Style the order list for consistency */
+ion-list {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+ion-item {
+  --background: transparent;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+ion-label h2 {
+  color: #1976d2;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+ion-label p, ion-label ul {
+  color: #222;
+  margin-bottom: 0.25rem;
+}
