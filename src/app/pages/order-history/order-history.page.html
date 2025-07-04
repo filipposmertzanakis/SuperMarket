@@ -14,7 +14,7 @@
   <ion-spinner *ngIf="loading"></ion-spinner>
 
   <!-- Expenditure Chart -->
-  <div *ngIf="!loading && chartData">
+  <div class="expenditure-chart-container" *ngIf="!loading && chartData">
     <canvas baseChart
       [data]="chartData"
       [options]="chartOptions"

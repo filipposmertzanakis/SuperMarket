@@ -21,36 +21,14 @@ export class OrderHistoryPage implements OnInit {
     responsive: true,
     plugins: {
       legend: {
-        display: true,
-        labels: {
-          color: 'white',
-          font: { size: 14, weight: 'bold' }
-        }
+        position: 'top',
       },
       title: {
         display: true,
         text: 'Expenditure Overview',
-        color: 'white',
-        font: { size: 18, weight: 'bold' }
-      },
-      tooltip: {
-        enabled: true,
-        backgroundColor: '#fff',
-        titleColor: 'white',
-        bodyColor: 'white',
-        borderColor: '#36A2EB',
-        borderWidth: 1
-      }
-    },
-    scales: {
-      x: {
-        grid: { color: '#e0e0e0' },
-        ticks: { color: 'dark', font: { size: 13 } }
-      },
-      y: {
-        beginAtZero: true,
-        grid: { color: '#e0e0e0' },
-        ticks: { color: '#222', font: { size: 13 } }
+        font: {
+          size: 20
+        }
       }
     }
   };

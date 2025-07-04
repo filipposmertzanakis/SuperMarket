@@ -1,4 +1,4 @@
-/* --- [1] BASE IMPORTS (Keep as is) --- */
+/* --- [1] BASE IMPORTS --- */
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -11,94 +11,91 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 
-/* --- [2] MODERN THEME & VARIABLES --- */
 :root {
-  /* Color Palette: More depth with layered grays */
-  --ion-color-background: #111113; /* Near black for the base */
-  --ion-color-step-100: #1c1c1f;   /* Slightly lighter for surfaces like cards, headers */
-  --ion-color-step-200: #2a2a2e;   /* Lighter for inputs or secondary elements */
   
-  /* Text & Borders */
-  --ion-color-text: #e2e8f0;       /* Softer, off-white (Slate 200) */
-  --ion-color-text-muted: #94a3b8; /* Muted gray for secondary text (Slate 400) */
-  --ion-color-border: #334155;     /* Subtle border color (Slate 700) */
+  --ion-color-background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  --ion-color-step-100: rgba(36, 37, 46, 0.95);
+  --ion-color-step-200: rgba(52, 54, 70, 0.92);
 
-  /* Accent Palette: Vibrant but controlled */
-  --ion-color-primary: #8b5cf6;    /* A vibrant violet (Violet 500) */
-  --ion-color-primary-shade: #7c3aed; /* Darker shade for hover/active (Violet 600) */
-  --ion-color-primary-tint: #a78bfa;   /* Lighter tint for subtle highlights (Violet 400) */
+  
+  --ion-color-text: #f1f5f9;
+  --ion-color-text-muted: #94a3b8;
+  --ion-color-border: #334155;
 
-  /* Theming Variables */
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
-  --transition-fast: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+ 
+  --ion-color-primary: #7c3aed;
+  --ion-color-primary-shade: #5b21b6;
+  --ion-color-primary-tint: #a78bfa;
+  --ion-color-accent: #38bdf8;
+  --ion-color-accent-tint: #67e8f9;
+
+
+  --glass-blur: blur(12px);
+  --glass-bg: rgba(36, 37, 46, 0.7);
+
+ 
+  --border-radius-sm: 10px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --transition-fast: 0.18s cubic-bezier(0.4, 0.8, 0.2, 1);
 }
 
-/* --- [3] GLOBAL STYLES --- */
+
 body {
-  --ion-background-color: var(--ion-color-background);
-  --ion-text-color: var(--ion-color-text);
-  /* Modern system font stack for performance and native feel */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: var(--ion-color-background) !important;
+  color: var(--ion-color-text);
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  letter-spacing: 0.01em;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* --- [4] COMPONENT STYLES --- */
 
-/* Header: Clean, separated by a border, not a shadow */
+ion-card, .glass-card, .expenditure-chart-container {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 32px 0 rgba(80, 80, 120, 0.12), 0 1.5px 6px 0 rgba(0,0,0,0.08);
+  border: 1.5px solid var(--ion-color-border);
+  margin-bottom: 2rem;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+ion-card:hover, .glass-card:hover, .expenditure-chart-container:hover {
+  box-shadow: 0 8px 40px 0 rgba(124, 58, 237, 0.18), 0 2px 12px 0 rgba(56,189,248,0.10);
+  transform: translateY(-2px) scale(1.01);
+}
+
+
 ion-header, ion-toolbar {
   --background: var(--ion-color-step-100);
   --color: var(--ion-color-text);
-  --border-width: 0 0 1px 0;
+  --border-width: 0 0 1.5px 0;
   --border-color: var(--ion-color-border);
   --border-style: solid;
-  font-weight: 600;
-}
-ion-toolbar {
-  box-shadow: none; /* Explicitly remove default shadow */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: none;
+  backdrop-filter: var(--glass-blur);
 }
 
-/* Button: Solid and confident. Shadow appears on interaction. */
+
 ion-button {
-  --background: var(--ion-color-primary);
+  --background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-accent));
   --background-hover: var(--ion-color-primary-shade);
   --background-activated: var(--ion-color-primary-shade);
-  --color: #ffffff;
+  --color: #fff;
   --border-radius: var(--border-radius-md);
-  
   font-weight: 600;
   text-transform: none;
-  
-  /* Shadow is now an interaction feedback, not a default state */
-  box-shadow: none;
+  box-shadow: 0 2px 12px rgba(56,189,248,0.10);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
-
 ion-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.18);
 }
 
-/* Card: Subtle depth, interactive lift on hover */
-ion-card {
-  background: var(--ion-color-step-100);
-  border-radius: var(--border-radius-lg);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Much subtler default shadow */
-  margin-bottom: 24px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  color: var(--ion-color-text-muted);
-}
 
-ion-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-ion-card-title, ion-card-subtitle {
-  color: var(--ion-color-text) !important;
-}
-
-/* List & Item: Clean dividers, no extra backgrounds */
 ion-list {
   background: transparent;
 }
@@ -106,10 +103,22 @@ ion-item {
   --background: transparent;
   --border-color: var(--ion-color-border);
   --color: var(--ion-color-text-muted);
-  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color-focused: var(--ion-color-accent);
+  border-bottom: 1px solid var(--ion-color-border);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 0.5rem;
+}
+ion-label h2, ion-card-title, ion-card-subtitle {
+  color: var(--ion-color-primary-tint) !important;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+ion-label p, ion-label ul {
+  color: var(--ion-color-text);
+  margin-bottom: 0.25rem;
 }
 
-/* Input & Search: Focus on the interaction state */
+
 ion-input, ion-searchbar {
   --background: var(--ion-color-step-200);
   --border-radius: var(--border-radius-md);
@@ -118,39 +127,75 @@ ion-input, ion-searchbar {
   box-shadow: none;
   transition: border-color var(--transition-fast);
 }
-/* Use :focus-within for better targeting when the inner input is focused */
 ion-input:focus-within, ion-searchbar:focus-within {
-  border-color: var(--ion-color-primary);
+  border-color: var(--ion-color-accent);
 }
 
-
-/* Segment: Modern, clean, and a better UX */
 ion-segment {
   --background: var(--ion-color-step-100);
   border-radius: var(--border-radius-lg);
   padding: 4px;
   margin: 18px 0 28px;
 }
-
 ion-segment-button {
   --color: var(--ion-color-text-muted);
-  --color-checked: #ffffff;
-  --indicator-color: transparent; /* Hide the default bottom line */
+  --color-checked: #fff;
+  --indicator-color: transparent;
   --border-radius: var(--border-radius-md);
   font-weight: 500;
   text-transform: capitalize;
   transition: background-color var(--transition-fast);
 }
-
-/* IMPORTANT: The class is now .segment-button-checked */
 ion-segment-button.segment-button-checked {
-  background: var(--ion-color-primary);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+  background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-accent));
+  box-shadow: 0 4px 15px rgba(56,189,248,0.18);
 }
 
-/* --- [5] UTILITY STYLES --- */
 
-/* Scrollbar: Subtle and on-brand */
+ion-toggle {
+  --handle-background-checked: var(--ion-color-accent);
+  --handle-background: var(--ion-color-step-200);
+  --track-background-checked: var(--ion-color-primary-tint);
+  --track-background: var(--ion-color-border);
+}
+ion-select, ion-select-option {
+  --background: var(--ion-color-step-200);
+  --color: var(--ion-color-text);
+  --placeholder-color: var(--ion-color-text-muted);
+  border-radius: var(--border-radius-md);
+}
+
+
+ion-grid {
+  padding: 0;
+}
+ion-col {
+  padding: 0.75rem;
+}
+@media (max-width: 600px) {
+  ion-card, .glass-card, .expenditure-chart-container {
+    border-radius: var(--border-radius-md);
+    margin-bottom: 1rem;
+  }
+}
+
+
+.expenditure-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0 1.5rem 0;
+  background: var(--glass-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 2px 12px rgba(56,189,248,0.10);
+  margin-bottom: 2rem;
+}
+.expenditure-chart-container canvas {
+  max-width: 100% !important;
+  height: 320px !important;
+}
+
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -160,21 +205,29 @@ ion-segment-button.segment-button-checked {
 ::-webkit-scrollbar-thumb {
   background-color: var(--ion-color-border);
   border-radius: 8px;
-  border: 2px solid var(--ion-color-background); /* Creates a nice padding effect */
+  border: 2px solid transparent;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--ion-color-primary-tint);
+  background-color: var(--ion-color-accent-tint);
 }
 
-/* Links: Clear and consistent */
+
 a {
-  color: var(--ion-color-primary-tint);
+  color: var(--ion-color-accent-tint);
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-fast);
 }
-
 a:hover {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-accent);
   text-decoration: underline;
+}
+
+
+.section-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+  letter-spacing: 0.01em;
+  margin-bottom: 1.2rem;
 }
