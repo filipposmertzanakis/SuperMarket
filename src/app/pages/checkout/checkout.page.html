@@ -24,12 +24,13 @@
 
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">{{ 'NAME' | translate }}</ion-label>
-      <ion-input [(ngModel)]="customer.name"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label position="stacked">{{ 'EMAIL' | translate }}</ion-label>
-      <ion-input type="email" [(ngModel)]="customer.email"></ion-input>
+      <ion-input 
+        type="email" 
+        [value]="userEmail" 
+        [readonly]="isLoggedIn" 
+        [(ngModel)]="customer.email">
+      </ion-input>
     </ion-item>
   </ion-list>
 

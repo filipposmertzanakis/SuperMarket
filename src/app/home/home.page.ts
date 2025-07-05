@@ -58,6 +58,8 @@ export class HomePage implements OnInit {
     });
   }
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/*******  09d913c8-b077-44f2-bcf1-fad33046d83e  *******/
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
       this.isLoggedIn = !!user;

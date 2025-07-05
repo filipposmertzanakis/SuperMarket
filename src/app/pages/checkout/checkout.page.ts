@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService, CartItem } from 'src/app/services/cart.service';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +16,8 @@ export class CheckoutPage implements OnInit {
   total: number = 0;
   currentLang: string;
 
+  isLoggedIn = false;
+  userEmail = '';
   customer = {
     name: '',
     email: ''
@@ -27,28 +30,38 @@ export class CheckoutPage implements OnInit {
     private cartService: CartService,
     private firestore: Firestore,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
-      this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
-      this.translate.onLangChange.subscribe(lang => {
-        this.currentLang = lang.lang;
-      });
+    this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Get cart items & total
     this.cartService.getCart().subscribe(items => {
       this.cartItems = items;
       this.total = this.cartService.getTotal();
     });
+
+    this.authService.getUser().subscribe(user => {
+    this.isLoggedIn = !!user;
+    if (user?.email) {
+      this.userEmail = user.email;
+      this.customer.email = user.email;  // also fill customer.email so it goes into the order
+    }
+  });
   }
 
   async completeOrder() {
-    if (!this.customer.name || !this.customer.email || this.cartItems.length === 0) {
+    if (!this.customer.email || this.cartItems.length === 0) {
       this.message = '❌ ' + this.translate.instant('FILL_ALL_FIELDS');
       return;
     }
 
-    const userId = this.authService.getUserId();
+    const userId = this.authService.getUserId();  // adjust if needed
 
     this.loading = true;
 
@@ -67,6 +80,11 @@ export class CheckoutPage implements OnInit {
       this.cartService.clearCart();
       this.message = '✅ ' + this.translate.instant('ORDER_SUCCESS');
       this.customer = { name: '', email: '' };
+
+      // Redirect to home after short delay so user can see the success message
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 1500);
     } catch (error) {
       console.error(error);
       this.message = '❌ ' + this.translate.instant('ORDER_ERROR');
