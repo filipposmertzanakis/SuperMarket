@@ -38,17 +38,17 @@ export class ProductDetailPage implements OnInit {
     });
   }
 
-  addToCart() {
+  async  addToCart() {
     if (!this.product) return;
-
-    this.cartService.addToCart({
+    await this.presentToast('Προσθήκη στο καλάθι...');
+    await this.cartService.addToCart({
       productId: this.productId!,
       title: this.product.title,
       price: this.product.price,
       quantity: 1
     });
-
-    alert(`${this.product.title} προστέθηκε στο καλάθι!`);
+    
+    await this.presentToast('Το προϊόν προστέθηκε στο Καλάθι!');
   }
 
   async presentToast(message: string) {

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { TranslateService } from '@ngx-translate/core'; 
 import { ChartConfiguration } from 'chart.js';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-history',
@@ -33,7 +34,7 @@ export class OrderHistoryPage implements OnInit {
     }
   };
 
-  constructor(private firestore: Firestore, private authService: AuthService, private cartService: CartService, private translate: TranslateService) {
+  constructor(private firestore: Firestore, private authService: AuthService, private cartService: CartService, private translate: TranslateService , private toastCtrl: ToastController) {
     this.currentLang = this.translate.currentLang || this.translate.getDefaultLang();
     this.translate.onLangChange.subscribe(lang => {
       this.currentLang = lang.lang;
@@ -98,7 +99,7 @@ export class OrderHistoryPage implements OnInit {
     };
   }
 
-  repeatOrder(order: any) {
+  async repeatOrder(order: any) {
     for (const item of order.items) {
       this.cartService.addToCart({
         productId: item.productId || item.title,
@@ -107,6 +108,15 @@ export class OrderHistoryPage implements OnInit {
         quantity: item.quantity,
       });
     }
-    alert('Τα προϊόντα προστέθηκαν ξανά στο καλάθι!');
+    await this.presentToast('Τα προϊόντα προστέθηκαν ξανά στο καλάθι!');
+  }
+
+    async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 }
