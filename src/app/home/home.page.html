@@ -56,29 +56,32 @@
   <h2 class="section-title ion-margin-top">{{ 'PRODUCTS' | translate }}</h2>
 
   <!-- Filters Card -->
-  <ion-card class="ion-padding">
-    <ion-card-header>
-      <ion-card-title>{{ 'FILTERS' | translate }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+<ion-card class="ion-padding filter-card">
+  <ion-card-header>
+    <ion-card-title>{{ 'FILTERS' | translate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="filter-content">
 
-      <!-- Category Filter Segment -->
-      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)">
-        <ion-segment-button *ngFor="let cat of categories" [value]="cat">
-          {{ cat | translate }}
-        </ion-segment-button>
-      </ion-segment>
+    <!-- Category Filter -->
+    <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterByCategory(selectedCategory)" scrollable>
+      <ion-segment-button *ngFor="let cat of categories" [value]="cat">
+        {{ cat | translate }}
+      </ion-segment-button>
+    </ion-segment>
 
-      <!-- Sort Order Select -->
+    <div class="filter-group">
+      <!-- Sort Order -->
       <ion-item lines="none">
         <ion-label>{{ 'SORT' | translate }}</ion-label>
-        <ion-select [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
+        <ion-select interface="popover" [(ngModel)]="sortOrder" (ionChange)="sortProducts()">
           <ion-select-option value="asc">{{ 'PRICE_ASC' | translate }}</ion-select-option>
           <ion-select-option value="desc">{{ 'PRICE_DESC' | translate }}</ion-select-option>
         </ion-select>
       </ion-item>
+    </div>
 
-      <!-- Search Input -->
+    <div class="filter-group">
+      <!-- Search -->
       <ion-item lines="none">
         <ion-label position="floating">{{ 'SEARCH' | translate }}</ion-label>
         <ion-input
@@ -88,9 +91,11 @@
           clearInput
         ></ion-input>
       </ion-item>
+    </div>
 
-      <!-- Price Range Filters -->
-      <ion-grid class="ion-padding-top">
+    <div class="filter-group">
+      <!-- Price Range -->
+      <ion-grid>
         <ion-row>
           <ion-col size="6">
             <ion-item lines="none">
@@ -118,15 +123,19 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+    </div>
 
+    <div class="filter-group">
       <!-- Discount Toggle -->
       <ion-item lines="none">
         <ion-label>{{ 'DISCOUNT_ONLY' | translate }}</ion-label>
-        <ion-toggle [(ngModel)]="filterDiscountOnly" (ionChange)="onDiscountToggle($event.detail.checked)"></ion-toggle>
+        <ion-toggle slot="end" [(ngModel)]="filterDiscountOnly" (ionChange)="onDiscountToggle($event.detail.checked)"></ion-toggle>
       </ion-item>
+    </div>
 
-    </ion-card-content>
-  </ion-card>
+  </ion-card-content>
+</ion-card>
+
 
   <!-- Products Grid -->
   <ion-grid>

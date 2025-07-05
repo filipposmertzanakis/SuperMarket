@@ -231,3 +231,38 @@ a:hover {
   letter-spacing: 0.01em;
   margin-bottom: 1.2rem;
 }
+
+/* Make filters visually separated and cleaner */
+.filter-card {
+  --background: var(--ion-card-background, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.filter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* vertical spacing between filter groups */
+}
+
+.filter-group {
+  padding-top: 4px;
+}
+
+ion-segment {
+  margin-bottom: 8px;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+}
+
+ion-input, ion-select {
+  font-size: 14px;
+}
+
+ion-toggle {
+  margin-left: auto;
+}
