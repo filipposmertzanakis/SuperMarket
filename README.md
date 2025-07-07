@@ -70,11 +70,11 @@
 ## Build για Android
 
 - ```bash
-  npx cap add android
+  Ionic  build
 - ```bash
-  npm run build
+	npx cap add android
 - ```bash
-  npx cap copy android
+	npx cap sync android
 - ```bash
   npx cap open android
 
