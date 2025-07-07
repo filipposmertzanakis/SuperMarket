@@ -43,7 +43,7 @@ html {
 
 
 
-ion-content {
+ion-content , ion-menu{
   --background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
 }
 
@@ -120,6 +120,11 @@ ion-button:hover {
 }
 ion-list {
   background: transparent;
+}
+
+.list-ios,
+.list-md {
+  background: transparent!important;
 }
 ion-item {
   --background: transparent;
