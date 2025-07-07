@@ -55,18 +55,17 @@ npm install -g @angular/cli @ionic/cli
 ## Οδηγίες Εγκατάστασης & Εκτέλεσης
 
 1️⃣ Κλωνοποίησε το repository:
-``` CMD
--git clone [<repository_url>](https://github.com/filipposmertzanakis/SuperMarket)
--cd supermarketApp
--npm install
--ionic serve
+``` CMD  git clone [<repository_url>](https://github.com/filipposmertzanakis/SuperMarket) ```
+- ``` cd supermarketApp ```
+- ``` npm install ```
+- ``` ionic serve ```
 
 ##Build για Android
 
--npx cap add android
--npm run build
--npx cap copy android
--npx cap open android
+- ```npx cap add android ```
+-``` npm run build```
+- ```npx cap copy android ```
+- ``` npx cap open android ``` 
 
 Συντελεστές
 Φίλιππος Μερτζανάκης Ε21104
