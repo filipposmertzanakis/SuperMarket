@@ -47,27 +47,41 @@
 - **npm** >= 9.x
 - **Android Studio** (για build και emulator)
 - **Git** (για κλωνοποίηση του project)
-- ```Terminal
-npm install -g @angular/cli @ionic/cli
+- ```bash
+  npm install -g @angular/cli @ionic/cli
 
 ---
 
 ## Οδηγίες Εγκατάστασης & Εκτέλεσης
 
-1️⃣ Κλωνοποίησε το repository:
-``` CMD  git clone [<repository_url>](https://github.com/filipposmertzanakis/SuperMarket) ```
-- ``` cd supermarketApp ```
-- ``` npm install ```
-- ``` ionic serve ```
+1️ Κλωνοποίησε το repository:
+- ```bash
+  git clone https://github.com/filipposmertzanakis/SuperMarket'''
+- ```bash
+  cd supermarketApp
+Καταίβασε τα dependecies
+- ```bash
+  npm install
+Μπορείτε να το τρέξετε και locally στο web πριν απο android
+- ```bash
+   ionic serve
+  
+---
 
-##Build για Android
+## Build για Android
 
-- ```npx cap add android ```
--``` npm run build```
-- ```npx cap copy android ```
-- ``` npx cap open android ``` 
+- ```bash
+  npx cap add android
+- ```bash
+  npm run build
+- ```bash
+  npx cap copy android
+- ```bash
+  npx cap open android
 
-Συντελεστές
+---
+
+## Συντελεστές
 Φίλιππος Μερτζανάκης Ε21104
 
 Αλφόνσος-Λεωνίδας Κώτσιος Ε21083
